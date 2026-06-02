@@ -244,6 +244,7 @@ export default function PequenasVitorias() {
                   <button
                     onClick={() => setMostrarFormulario(false)}
                     className="px-4 py-2 font-body text-sm border-2 border-foreground/30 rounded-md hover:bg-muted transition-colors"
+                  aria-label="Cancelar registro de conquista"
                   >
                     Cancelar
                   </button>

@@ -163,6 +163,7 @@ function RespGuiada({ onConcluir }: { onConcluir: () => void }) {
             setCiclo(1);
           }}
           className="font-body text-xs text-muted-foreground underline"
+          aria-label="Pausar respiração guiada"
         >
           Pausar
         </button>
@@ -172,6 +173,7 @@ function RespGuiada({ onConcluir }: { onConcluir: () => void }) {
         <button
           onClick={onConcluir}
           className="font-body text-xs text-muted-foreground underline"
+          aria-label="Pular esta etapa e ir para a próxima"
         >
           Pular esta etapa
         </button>
@@ -279,6 +281,7 @@ function Tecnica54321({ onConcluir }: { onConcluir: () => void }) {
         <button
           onClick={onConcluir}
           className="font-body text-xs text-muted-foreground underline"
+          aria-label="Pular esta etapa e ir para a próxima"
         >
           Pular esta etapa
         </button>

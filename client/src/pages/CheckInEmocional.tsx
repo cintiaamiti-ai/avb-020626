@@ -274,6 +274,7 @@ export default function CheckInEmocional() {
                     setSalvo(false);
                   }}
                   className="mt-4 font-body text-sm text-primary underline hover:text-primary/80"
+                  aria-label="Fazer outro check-in emocional"
                 >
                   Fazer outro check-in
                 </button>
@@ -288,6 +289,7 @@ export default function CheckInEmocional() {
                 onClick={() => setMostrarHistorico((v) => !v)}
                 className="w-full flex items-center justify-between font-body font-semibold text-sm"
                 aria-expanded={mostrarHistorico}
+                aria-label="Abrir ou fechar histórico de check-ins"
               >
                 <span className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-muted-foreground" />
