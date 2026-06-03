@@ -3,6 +3,7 @@ import { Phone, Users, RotateCcw } from "lucide-react";
 
 interface Props {
   children: ReactNode;
+  resetKey?: string;
 }
 
 interface State {
@@ -30,6 +31,23 @@ export default class ErrorBoundary extends Component<Props, State> {
       hasError: true,
       errorId: `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`,
     };
+  }
+
+
+  static getDerivedStateFromProps(props: Props, state: State): Partial<State> | null {
+    // Resetar o boundary quando a rota muda (resetKey muda)
+    if (state.hasError && props.resetKey !== undefined) {
+      // Verificar se o resetKey mudou desde o último render com erro
+      return null; // getDerivedStateFromError já cuidou disso
+    }
+    return null;
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    // Resetar automaticamente quando a rota muda
+    if (this.state.hasError && prevProps.resetKey !== this.props.resetKey) {
+      this.setState({ hasError: false, errorId: "" });
+    }
   }
 
   componentDidCatch(error: Error, info: ErrorInfo) {

@@ -12,14 +12,14 @@ const KEY_MATERIAL = "avb-secure-storage-v1";
 
 async function getDerivedKey(): Promise<CryptoKey> {
   let saltHex = localStorage.getItem(SALT_KEY);
-  let salt: Uint8Array;
+  let salt: Uint8Array<ArrayBuffer>;
 
   if (saltHex) {
     salt = new Uint8Array(
       saltHex.match(/.{1,2}/g)!.map((b) => parseInt(b, 16))
     );
   } else {
-    salt = crypto.getRandomValues(new Uint8Array(16));
+    salt = crypto.getRandomValues(new Uint8Array(16)) as Uint8Array<ArrayBuffer>;
     saltHex = Array.from(salt)
       .map((b) => b.toString(16).padStart(2, "0"))
       .join("");
@@ -57,7 +57,7 @@ async function encrypt(plaintext: string): Promise<string> {
   const combined = new Uint8Array(iv.byteLength + ciphertext.byteLength);
   combined.set(iv, 0);
   combined.set(new Uint8Array(ciphertext), iv.byteLength);
-  return btoa(String.fromCharCode(...combined));
+  return btoa(Array.from(combined).map(b => String.fromCharCode(b)).join(""));
 }
 
 async function decrypt(encoded: string): Promise<string> {

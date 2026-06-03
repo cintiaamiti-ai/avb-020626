@@ -113,11 +113,11 @@ export default function EscalaESJ() {
   const podeCalcular = Object.values(respostas).every((v) => v !== null);
 
   const calcular = async () => {
-    const pontuacao = Object.values(respostas).reduce((s, v) => s + (v ?? 0), 0);
+    const pontuacao = Object.values(respostas).reduce<number>((s, v) => s + (v ?? 0), 0);
     const semana = getSemana();
     const novoHistorico = [
       ...historico.filter((h) => h.semana !== semana),
-      { semana, pontuacao },
+      { semana, pontuacao: pontuacao as number },
     ].slice(-8);
 
     // FASE 1 — BUG-02: salvar via storage.ts (criptografado)
@@ -126,8 +126,8 @@ export default function EscalaESJ() {
     setMostrarResultado(true);
   };
 
-  const pontuacaoAtual = useMemo(
-    () => Object.values(respostas).reduce((s, v) => s + (v ?? 0), 0),
+  const pontuacaoAtual = useMemo<number>(
+    () => Object.values(respostas).reduce<number>((s, v) => s + (v ?? 0), 0),
     [respostas]
   );
 

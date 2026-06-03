@@ -1,4 +1,5 @@
 import { lazy, Suspense } from "react";
+import { useLocation } from "wouter";
 import { Switch, Route } from "wouter";
 import { Toaster } from "@/components/ui/sonner";
 import ErrorBoundary from "@/components/ErrorBoundary";
@@ -47,10 +48,10 @@ function PageLoading() {
   );
 }
 
-export default function App() {
+function AppRoutes() {
+  const [location] = useLocation();
   return (
-    // FASE 1 — ARQ-04: ErrorBoundary no topo da aplicação
-    <ErrorBoundary>
+    <ErrorBoundary resetKey={location}>
       <Suspense fallback={<PageLoading />}>
         <Switch>
           <Route path="/" component={Home} />
@@ -82,4 +83,8 @@ export default function App() {
       <Toaster richColors closeButton />
     </ErrorBoundary>
   );
+}
+
+export default function App() {
+  return <AppRoutes />;
 }

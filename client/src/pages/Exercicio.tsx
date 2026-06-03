@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useParams } from "wouter";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
