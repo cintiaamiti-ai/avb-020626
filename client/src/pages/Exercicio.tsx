@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
-import { useParams } from "wouter";
+import { useParams, Link } from "wouter";
 import { motion } from "framer-motion";
-import { Link } from "wouter";
 import { ArrowLeft, CheckCircle2, Save, Phone, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useApp } from "@/contexts/AppContext";
 import { exerciciosList } from "./Exercicios";
 import { toast } from "sonner";
 import { PageAudioWrapper } from "@/components/PageAudioWrapper";
+import HealthyExit from "@/components/HealthyExit";
 
 // Exercise content definitions - all 12 exercises per spec
 const exerciciosConteudo: Record<number, {
@@ -138,6 +138,25 @@ export default function Exercicio() {
   const [salvo, setSalvo] = useState(false);
   const [respiracaoAtiva, setRespiracaoAtiva] = useState(false);
   const [faseResp, setFaseResp] = useState(0);
+  const [contadorResp, setContadorResp] = useState(4);
+
+  // Refs para cleanup do timer de respiração (memory leak fix)
+  const respIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const respTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Cleanup ao desmontar componente
+  // FIX (rules-of-hooks): todos os hooks precisam ficar ANTES do early return abaixo.
+  // Antes, esses hooks vinham depois do `if (!exercicio...) return`, o que quebra a
+  // ordem dos hooks entre renders (ex.: navegar de um exercício válido para um id
+  // inválido) e pode derrubar o React com "Rendered more hooks than during the
+  // previous render" — justamente na tela de respiração usada em crise.
+  useEffect(() => {
+    return () => {
+      if (respIntervalRef.current) clearInterval(respIntervalRef.current);
+      if (respTimeoutRef.current) clearTimeout(respTimeoutRef.current);
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    };
+  }, []);
 
   if (!exercicio || !conteudo) {
     return (
@@ -162,20 +181,6 @@ export default function Exercicio() {
   };
 
   const fasesResp = ["Inspire", "Segure", "Expire", "Pause"];
-  const [contadorResp, setContadorResp] = useState(4);
-
-  // Refs para cleanup do timer de respiração (memory leak fix)
-  const respIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const respTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  // Cleanup ao desmontar componente
-  useEffect(() => {
-    return () => {
-      if (respIntervalRef.current) clearInterval(respIntervalRef.current);
-      if (respTimeoutRef.current) clearTimeout(respTimeoutRef.current);
-      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-    };
-  }, []);
 
   const pararRespiracao = () => {
     if (respIntervalRef.current) clearInterval(respIntervalRef.current);
@@ -497,6 +502,9 @@ export default function Exercicio() {
             Seus dados ficam salvos apenas no seu dispositivo. Ninguém mais tem acesso.
           </motion.p>
         )}
+
+        {/* FASE 3 — UX-02: HealthyExit após salvar o exercício */}
+        {salvo && <HealthyExit contexto="exercicio" />}
 
         {/* Navigation */}
         <div className="flex justify-between mt-8 pt-6 border-t-2 border-foreground/20">

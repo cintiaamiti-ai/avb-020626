@@ -28,7 +28,7 @@ const distorcoes = [
     numero: 4,
     titulo: "A Caça ao Prejuízo",
     pensamento: "\"Preciso recuperar apostando mais.\"",
-    realidade: "É a armadilha mais perigosa. As perdas só aumentam.",
+    realidade: "É uma das mais comuns e difíceis de perceber. As perdas só aumentam.",
   },
   {
     numero: 5,

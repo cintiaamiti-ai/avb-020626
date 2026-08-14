@@ -11,7 +11,7 @@ export default defineConfig({
     environment: "jsdom",
 
     // ─── Setup global ─────────────────────────────────────────────────────────
-    setupFiles: ["./src/test/setup.ts"],
+    setupFiles: ["./client/src/test/setup.ts"],
 
     // ─── Globals (describe, it, expect sem import) ────────────────────────────
     globals: true,
@@ -21,13 +21,13 @@ export default defineConfig({
       provider: "v8",
       reporter: ["text", "json", "html", "lcov"],
       reportsDirectory: "./coverage",
-      include: ["src/**/*.{ts,tsx}"],
+      include: ["client/src/**/*.{ts,tsx}"],
       exclude: [
-        "src/test/**",
-        "src/**/*.test.{ts,tsx}",
-        "src/**/*.spec.{ts,tsx}",
-        "src/main.tsx",
-        "src/vite-env.d.ts",
+        "client/src/test/**",
+        "client/src/**/*.test.{ts,tsx}",
+        "client/src/**/*.spec.{ts,tsx}",
+        "client/src/main.tsx",
+        "client/src/vite-env.d.ts",
       ],
       thresholds: {
         lines: 70,
@@ -38,7 +38,7 @@ export default defineConfig({
     },
 
     // ─── Padrão de arquivos de teste ──────────────────────────────────────────
-    include: ["src/**/*.{test,spec}.{ts,tsx}", "tests/**/*.{test,spec}.{ts,tsx}"],
+    include: ["client/src/**/*.{test,spec}.{ts,tsx}", "tests/**/*.{test,spec}.{ts,tsx}"],
 
     // ─── Timeout ─────────────────────────────────────────────────────────────
     testTimeout: 10000,
@@ -48,7 +48,8 @@ export default defineConfig({
   // ─── Resolver aliases (espelha vite.config.ts) ───────────────────────────────
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(__dirname, "./client/src"),
+      "@shared": path.resolve(__dirname, "./shared"),
     },
   },
 });

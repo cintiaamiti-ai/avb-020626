@@ -1,6 +1,5 @@
 import { lazy, Suspense } from "react";
-import { useLocation } from "wouter";
-import { Switch, Route } from "wouter";
+import { useLocation, Switch, Route } from "wouter";
 import { Toaster } from "@/components/ui/sonner";
 import ErrorBoundary from "@/components/ErrorBoundary";
 

@@ -27,7 +27,7 @@ const perguntas: Pergunta3C[] = [
   },
   {
     texto: "Você volta a apostar para tentar recuperar o dinheiro que perdeu?",
-    explicacao: "Esse comportamento, chamado de caça ao prejuízo, é uma das armadilhas mais perigosas. As perdas só aumentam.",
+    explicacao: "Esse comportamento, chamado de caça ao prejuízo, é uma das armadilhas mais comuns e difíceis de perceber. As perdas só aumentam.",
     categoria: "perseguicao",
   },
 ];

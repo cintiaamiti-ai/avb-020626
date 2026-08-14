@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useApp } from "@/contexts/AppContext";
-import { ArrowLeft, ArrowRight, CheckCircle2, HelpCircle } from "lucide-react";
-import { Link } from "wouter";
+import { ArrowLeft, CheckCircle2, HelpCircle } from "lucide-react";
 import { PageAudioWrapper } from "@/components/PageAudioWrapper";
 import { AudioButtonInline } from "@/components/AudioPlayer";
 
