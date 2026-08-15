@@ -40,66 +40,66 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-display: "Patua One", serif;
+  --font-display: "Baloo 2", sans-serif;
   --font-body: "Nunito", sans-serif;
 }
 
 :root {
-  /* Brasilidades - Cordel Digital Theme */
-  --radius: 0.5rem;
-  
-  /* Bege-papel background */
-  --background: oklch(0.96 0.015 75);
-  --foreground: oklch(0.15 0.02 50);
-  
-  /* Cards with warm paper feel */
-  --card: oklch(0.98 0.01 75);
-  --card-foreground: oklch(0.15 0.02 50);
-  
-  --popover: oklch(0.98 0.01 75);
-  --popover-foreground: oklch(0.15 0.02 50);
-  
-  /* Azul-botijão primary */
-  --primary: oklch(0.45 0.15 240);
-  --primary-foreground: oklch(0.98 0.005 75);
-  
-  /* Terracota secondary */
-  --secondary: oklch(0.55 0.14 45);
+  /* Viver Bem — Bem-estar suave (paleta derivada do logo da Associação Viver Bem) */
+  --radius: 1rem;
+
+  /* Fundo neutro, levemente azulado — sem textura, sem tom terracota */
+  --background: oklch(0.98 0.006 250);
+  --foreground: oklch(0.22 0.03 255);
+
+  /* Cards brancos, quase sem tingimento */
+  --card: oklch(0.995 0.003 250);
+  --card-foreground: oklch(0.22 0.03 255);
+
+  --popover: oklch(0.995 0.003 250);
+  --popover-foreground: oklch(0.22 0.03 255);
+
+  /* Azul Viver Bem primary */
+  --primary: oklch(0.40 0.13 255);
+  --primary-foreground: oklch(0.98 0.005 250);
+
+  /* Laranja "associação" secondary */
+  --secondary: oklch(0.52 0.16 45);
   --secondary-foreground: oklch(0.98 0.005 75);
-  
-  /* Muted - soft beige */
-  --muted: oklch(0.92 0.02 75);
-  --muted-foreground: oklch(0.45 0.03 50);
-  
-  /* Verde-esperança accent */
-  --accent: oklch(0.50 0.14 155);
+
+  /* Muted — cinza-azulado suave */
+  --muted: oklch(0.95 0.008 250);
+  --muted-foreground: oklch(0.48 0.02 255);
+
+  /* Verde-água do buquê do logo — acento de confirmação/positivo */
+  --accent: oklch(0.52 0.11 190);
   --accent-foreground: oklch(0.98 0.005 75);
-  
-  /* Vermelho-urgência destructive */
-  --destructive: oklch(0.50 0.2 25);
+
+  /* Vermelho — reservado só para emergência/crise, como antes */
+  --destructive: oklch(0.52 0.19 25);
   --destructive-foreground: oklch(0.98 0.005 75);
-  
-  /* Borders - dark like cel-shading outlines */
-  --border: oklch(0.30 0.03 50);
-  --input: oklch(0.85 0.02 75);
-  --ring: oklch(0.45 0.15 240);
-  
+
+  /* Bordas suaves — sem contorno grosso tipo cel-shading */
+  --border: oklch(0.90 0.012 250);
+  --input: oklch(0.95 0.01 250);
+  --ring: oklch(0.40 0.13 255);
+
   /* Charts */
-  --chart-1: oklch(0.45 0.15 240);
-  --chart-2: oklch(0.55 0.14 45);
-  --chart-3: oklch(0.50 0.14 155);
-  --chart-4: oklch(0.65 0.15 80);
-  --chart-5: oklch(0.50 0.2 25);
-  
+  --chart-1: oklch(0.40 0.13 255);
+  --chart-2: oklch(0.52 0.16 45);
+  --chart-3: oklch(0.52 0.11 190);
+  --chart-4: oklch(0.50 0.16 300);
+  --chart-5: oklch(0.52 0.19 25);
+
   /* Sidebar */
-  --sidebar: oklch(0.20 0.03 50);
-  --sidebar-foreground: oklch(0.92 0.01 75);
-  --sidebar-primary: oklch(0.45 0.15 240);
-  --sidebar-primary-foreground: oklch(0.98 0.005 75);
-  --sidebar-accent: oklch(0.30 0.04 50);
-  --sidebar-accent-foreground: oklch(0.92 0.01 75);
-  --sidebar-border: oklch(0.35 0.03 50);
-  --sidebar-ring: oklch(0.45 0.15 240);
+  --sidebar: oklch(0.18 0.04 255);
+  --sidebar-foreground: oklch(0.94 0.01 250);
+  --sidebar-primary: oklch(0.40 0.13 255);
+  --sidebar-primary-foreground: oklch(0.98 0.005 250);
+  --sidebar-accent: oklch(0.28 0.05 255);
+  --sidebar-accent-foreground: oklch(0.94 0.01 250);
+  --sidebar-border: oklch(0.32 0.04 255);
+  --sidebar-ring: oklch(0.40 0.13 255);
 }
 
 @layer base {
@@ -155,31 +155,17 @@
     }
   }
 
-  /* Cel-shading card style */
+  /* Card — Bem-estar suave: sombra difusa, cantos bem arredondados, borda fina */
   .card-cordel {
-    border: 3px solid oklch(0.15 0.02 50);
-    border-radius: 0.5rem;
-    background: oklch(0.98 0.01 75);
-    box-shadow: 4px 4px 0px oklch(0.15 0.02 50);
+    border: 1px solid var(--border);
+    border-radius: 1.25rem;
+    background: var(--card);
+    box-shadow: 0 1px 3px oklch(0.22 0.03 255 / 0.06), 0 4px 12px oklch(0.22 0.03 255 / 0.06);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   .card-cordel:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0px oklch(0.15 0.02 50);
-  }
-
-  /* SOS button pulse */
-  .sos-pulse {
-    animation: sosPulse 2s ease-in-out infinite;
-  }
-  @keyframes sosPulse {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 oklch(0.50 0.2 25 / 0.4); }
-    50% { transform: scale(1.02); box-shadow: 0 0 0 12px oklch(0.50 0.2 25 / 0); }
-  }
-
-  /* Paper texture overlay */
-  .paper-texture {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px oklch(0.22 0.03 255 / 0.08), 0 10px 24px oklch(0.22 0.03 255 / 0.10);
   }
 }
 
@@ -204,6 +190,8 @@ body.high-contrast {
   --border: oklch(0 0 0);
   --muted: oklch(0.95 0 0);
   --muted-foreground: oklch(0.15 0 0);
+  --sidebar: oklch(0 0 0);
+  --sidebar-foreground: oklch(1 0 0);
 }
 
 body.high-contrast .card-cordel {
@@ -267,7 +255,7 @@ body.large-text input {
 
 /* Focus visible para teclado */
 *:focus-visible {
-  outline: 3px solid oklch(0.45 0.15 240);
+  outline: 3px solid oklch(0.40 0.13 255);
   outline-offset: 2px;
 }
 
