@@ -55,14 +55,19 @@ function loadState(): AppState {
       const parsed = JSON.parse(saved);
       return { ...defaultState, ...parsed };
     }
-  } catch {}
+  } catch {
+    // Dado corrompido ou localStorage indisponível — segue com o padrão abaixo.
+  }
   return defaultState;
 }
 
 function saveState(state: AppState) {
   try {
     localStorage.setItem("avb-app-state", JSON.stringify(state));
-  } catch {}
+  } catch {
+    // localStorage cheio ou indisponível — falha silenciosa é intencional
+    // (não deve derrubar a UI por não conseguir persistir o estado).
+  }
 }
 
 export function AppProvider({ children }: { children: ReactNode }) {

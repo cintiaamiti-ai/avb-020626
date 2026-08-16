@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useApp } from "@/contexts/AppContext";
-import { ArrowLeft, ArrowRight, CheckCircle2, HelpCircle } from "lucide-react";
-import { Link } from "wouter";
+import { ArrowLeft, CheckCircle2, HelpCircle } from "lucide-react";
 import { PageAudioWrapper } from "@/components/PageAudioWrapper";
 import { AudioButtonInline } from "@/components/AudioPlayer";
 
@@ -102,17 +101,17 @@ export default function Triagem() {
 
   const nivelDescricao = {
     DE: {
-      titulo: "Trilha 1 — Linguagem Direta",
+      titulo: "Direto ao ponto",
       descricao: "Vamos usar palavras simples e exemplos do dia a dia. Foco no que importa: sua família, suas contas, sua paz.",
       cor: "bg-secondary",
     },
     C: {
-      titulo: "Trilha 2 — Linguagem Educativa",
+      titulo: "Com exemplos e explicações",
       descricao: "Vamos usar analogias e explicações claras para você entender o que acontece no seu cérebro e como retomar o controle.",
       cor: "bg-primary",
     },
     AB: {
-      titulo: "Trilha 3 — Linguagem Clínica",
+      titulo: "Com base em evidências",
       descricao: "Vamos abordar os mecanismos cognitivos, a ilusão do investimento e estratégias baseadas em evidências para sua recuperação.",
       cor: "bg-accent",
     },

@@ -30,7 +30,9 @@ function loadSettings(): AccessibilityState {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) return JSON.parse(saved);
-  } catch {}
+  } catch {
+    // Dado corrompido ou localStorage indisponível — segue com o padrão abaixo.
+  }
   return {
     highContrast: false,
     largeText: false,

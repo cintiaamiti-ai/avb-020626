@@ -6,6 +6,7 @@ import js from "@eslint/js";
 import tsPlugin from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import reactHooks from "eslint-plugin-react-hooks";
+import globals from "globals";
 
 export default [
   // ─── Ignorados ──────────────────────────────────────────────────────────────
@@ -33,34 +34,15 @@ export default [
         sourceType: "module",
         ecmaFeatures: { jsx: true },
       },
+      // Antes: uma lista de globals do browser mantida manualmente, faltando
+      // itens como HTMLInputElement, HTMLTextAreaElement, CryptoKey e
+      // SpeechSynthesisUtterance/Voice — o que gerava dezenas de falsos
+      // positivos "is not defined" e escondia erros reais no meio do ruído.
+      // Agora usamos o conjunto padrão `globals.browser`, que cobre o
+      // ambiente de navegador de forma completa e é mantido pela comunidade.
       globals: {
-        window: "readonly",
-        document: "readonly",
-        navigator: "readonly",
-        console: "readonly",
-        crypto: "readonly",
-        localStorage: "readonly",
-        setTimeout: "readonly",
-        clearTimeout: "readonly",
-        setInterval: "readonly",
-        clearInterval: "readonly",
-        AudioContext: "readonly",
-        URL: "readonly",
-        URLSearchParams: "readonly",
-        fetch: "readonly",
-        RequestInit: "readonly",
-        Response: "readonly",
-        Headers: "readonly",
-        FormData: "readonly",
-        Blob: "readonly",
-        File: "readonly",
-        FileReader: "readonly",
-        Uint8Array: "readonly",
-        ArrayBuffer: "readonly",
-        TextEncoder: "readonly",
-        TextDecoder: "readonly",
-        btoa: "readonly",
-        atob: "readonly",
+        ...globals.browser,
+        SpeechSynthesisVoice: "readonly",
       },
     },
     plugins: {
@@ -68,6 +50,13 @@ export default [
       "react-hooks": reactHooks,
     },
     rules: {
+      // `no-undef` do ESLint não entende tipos usados apenas em posição de
+      // tipo (ex.: `React.ComponentProps<...>` sem importar `React` como
+      // valor — válido em TS moderno). O TypeScript (`tsc --noEmit`) já
+      // verifica identificadores indefinidos com muito mais precisão, então
+      // desativamos aqui para não gerar falsos positivos em arquivos .ts/.tsx.
+      "no-undef": "off",
+
       // ─── TypeScript ──────────────────────────────────────────────────────────
       "@typescript-eslint/no-unused-vars": [
         "warn",

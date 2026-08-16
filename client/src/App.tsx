@@ -1,8 +1,9 @@
 import { lazy, Suspense } from "react";
-import { useLocation } from "wouter";
-import { Switch, Route } from "wouter";
+import { useLocation, Switch, Route } from "wouter";
 import { Toaster } from "@/components/ui/sonner";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import { AccessibilityToolbar } from "@/components/AccessibilityToolbar";
+import Footer from "@/components/Footer";
 
 // FASE 4 — P-01: lazy loading de todas as rotas exceto Home e SOS (críticos)
 // Home e SOS carregam eager para garantir acesso imediato mesmo em conexão lenta
@@ -81,10 +82,22 @@ function AppRoutes() {
         </Switch>
       </Suspense>
       <Toaster richColors closeButton />
+      {/* Painel de acessibilidade — existia pronto no código mas nunca era
+          renderizado em lugar nenhum. Fica disponível em todas as páginas. */}
+      <AccessibilityToolbar />
     </ErrorBoundary>
   );
 }
 
 export default function App() {
-  return <AppRoutes />;
+  return (
+    // Cada página já declara "flex-1" na sua própria div raiz (esperando um
+    // pai flex para se esticar) — mas não existia nenhum pai flex acima
+    // delas, então o rodapé (Footer) nunca tinha como "grudar" embaixo em
+    // páginas curtas. Esse wrapper ativa o layout que as páginas já assumiam.
+    <div className="min-h-screen flex flex-col">
+      <AppRoutes />
+      <Footer />
+    </div>
+  );
 }

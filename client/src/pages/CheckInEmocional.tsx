@@ -6,6 +6,7 @@ import { PageAudioWrapper } from "@/components/PageAudioWrapper";
 import { Button } from "@/components/ui/button";
 import { saveEncrypted, loadEncrypted } from "@/lib/storage";
 import { toast } from "sonner";
+import HealthyExit from "@/components/HealthyExit";
 
 const CHECKIN_AUDIO_TEXT = `Check-in Emocional. Como você está se sentindo agora? Escolha uma opção que descreva seu estado atual. Tranquilo, Preocupado, Ansioso, Triste, ou Com vontade de jogar. Não há resposta certa ou errada. Este espaço é seu.`;
 
@@ -281,6 +282,9 @@ export default function CheckInEmocional() {
               </motion.div>
             )}
           </AnimatePresence>
+
+          {/* FASE 3 — UX-02: HealthyExit após o check-in ser registrado */}
+          {salvo && <HealthyExit contexto="checkin" />}
 
           {/* Histórico */}
           {!carregando && historico.length > 0 && (

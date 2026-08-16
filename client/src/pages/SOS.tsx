@@ -8,6 +8,7 @@ import {
 import { PageAudioWrapper } from "@/components/PageAudioWrapper";
 import { Button } from "@/components/ui/button";
 import { useApp } from "@/contexts/AppContext";
+import HealthyExit from "@/components/HealthyExit";
 
 const SOS_AUDIO_TEXT = `Botão SOS. A onda de impulso dura em média 15 minutos. Aguente firme, ela vai passar. Primeiro: ative o modo avião do seu celular para cortar o acesso a sites de apostas. Depois pressione Iniciar para começar o cronômetro. Enquanto espera, respire fundo. Se precisar falar com alguém agora: CVV, ligue 188, gratuito, 24 horas, sigiloso. Jogadores Anônimos, ligue 11, 3229-1615.`;
 
@@ -382,6 +383,9 @@ export default function SOS() {
             </Link>
           </div>
         )}
+
+        {/* FASE 3 — UX-02: HealthyExit ao concluir os 15 minutos do SOS */}
+        {timerConcluido && <HealthyExit contexto="sos" />}
       </div>
     </div>
     </PageAudioWrapper>
